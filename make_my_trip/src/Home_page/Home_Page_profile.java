@@ -18,8 +18,12 @@ public class Home_Page_profile {
 
 		return null;
 	} 
-	@FindBy
-	public WebElement test;
+	@FindBy(xpath="//button[@id='wzrk-cancel']")
+	private WebElement popupbutton;
+
+	public WebElement getPopupbutton() {
+		return popupbutton;
+	}
 	
 
 }

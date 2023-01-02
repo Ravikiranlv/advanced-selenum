@@ -14,6 +14,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
@@ -28,7 +29,7 @@ public class TC_makeMyTrip_001 {
 
 	@Test(dataProvider = "testData")
 	public void readDataProvider(String[] arr) throws EncryptedDocumentException, IOException, InterruptedException {
-		System.setProperty("webdriver.chrome.driver", "./softwares/chromedriver.exe");
+		System.setProperty("webdriver.chrome.driver", "./softwares/chromedriver1.exe");
 		WebDriver driver = new ChromeDriver();
 		driver.manage().window().maximize();
 		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
@@ -52,6 +53,8 @@ public class TC_makeMyTrip_001 {
 		WebElement fromPlace1 = wait.until(
 				ExpectedConditions.visibilityOf(driver.findElement(By.id("react-autowhatever-1-section-0-item-0"))));
 		act.moveToElement(fromPlace1).click().build().perform();
+		Select sel=new Select(fromPlace1);
+		
 
 		driver.findElement(By.xpath("//span[.='DEPARTURE']")).click();
 		Thread.sleep(3000);

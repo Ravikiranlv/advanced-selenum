@@ -3,12 +3,11 @@
 <suite name="Failed suite [Default suite]" guice-stage="DEVELOPMENT">
   <test thread-count="5" name="Default test(failed)">
     <classes>
-      <class name="Home_page.Testcase_into_automation_script">
+      <class name="make_my_trip.TC_makeMyTrip_001">
         <methods>
-          <include name="Browserlaunch"/>
-          <include name="Login"/>
+          <include name="readDataProvider" invocation-numbers="0"/>
         </methods>
-      </class> <!-- Home_page.Testcase_into_automation_script -->
+      </class> <!-- make_my_trip.TC_makeMyTrip_001 -->
     </classes>
   </test> <!-- Default test(failed) -->
 </suite> <!-- Failed suite [Default suite] -->

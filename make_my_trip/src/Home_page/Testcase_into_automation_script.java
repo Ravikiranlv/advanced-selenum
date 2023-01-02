@@ -22,7 +22,7 @@ public class Testcase_into_automation_script {
 	
 	@BeforeClass
 	public void Browserlaunch() {
-		System.setProperty("webdriver.chrome.driver", "./softwares/chromedriver.exe");
+		System.setProperty("webdriver.chrome.driver", "./softwares/chromedriver1.exe");
 		driver=new ChromeDriver();	
 		Reporter.log("Browser is launched");
 		driver.manage().window().maximize();
@@ -36,11 +36,22 @@ public class Testcase_into_automation_script {
 		String url = READdataFROMexcel.readFromExcel("./testdata/Book1.xlsx", "Sheet1", 0, 0);
 		driver.get(url);
 		Reporter.log("url is triggered");
-		wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//button[@id='wzrk-cancel']")));
-		driver.findElement(By.xpath("//button[@id='wzrk-cancel']")).click();
 		Home_Page_profile homePage = new Home_Page_profile();
+		homePage.getPopupbutton().click();
+		Reporter.log("popup is handled");
 		WebElement textfeild = homePage.getSearch();
-		assertTrue(textfeild.isDisplayed(), "the url is not triggered");
+		assertTrue(textfeild.isDisplayed(),"user is not able to handle popup");
+		
+		
+		
+		
+		//WebElement popup = homePage.getPopupbutton();
+	//	Thread.sleep(5000);
+	//	assertTrue(popup.isDisplayed(),"url is not triggered");
+		
+	//	WebElement search = homePage.getSearch();
+	//	assertTrue(search.isDisplayed(), "url is not triggered");
+		
 		//wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//span[@aria-label='Close Notifications']")));
 		//driver.findElement(By.xpath("//span[@aria-label='Close Notifications']")).click();
 		//Home_Page_profile homePage = new Home_Page_profile();
