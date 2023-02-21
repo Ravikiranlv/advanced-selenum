@@ -22,7 +22,7 @@ public class Testcase_into_automation_script {
 	
 	@BeforeClass
 	public void Browserlaunch() {
-		System.setProperty("webdriver.chrome.driver", "./softwares/chromedriver1.exe");
+		System.setProperty("webdriver.chrome.driver", "./softwares/chromedriver.exe");
 		driver=new ChromeDriver();	
 		Reporter.log("Browser is launched");
 		driver.manage().window().maximize();

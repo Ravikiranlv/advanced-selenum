@@ -1,5 +1,8 @@
 package make_my_trip;
 
+import java.awt.AWTException;
+import java.awt.Robot;
+import java.awt.event.KeyEvent;
 import java.io.IOException;
 import java.time.LocalDateTime;
 import java.util.List;
@@ -8,10 +11,12 @@ import java.util.concurrent.TimeUnit;
 import org.apache.poi.EncryptedDocumentException;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
@@ -28,17 +33,25 @@ public class TC_makeMyTrip_001 {
 	}
 
 	@Test(dataProvider = "testData")
-	public void readDataProvider(String[] arr) throws EncryptedDocumentException, IOException, InterruptedException {
-		System.setProperty("webdriver.chrome.driver", "./softwares/chromedriver1.exe");
-		WebDriver driver = new ChromeDriver();
+	public void readDataProvider(String[] arr) throws EncryptedDocumentException, IOException, InterruptedException, AWTException {
+		System.setProperty("webdriver.gecko.driver", "./softwares/geckodriver.exe");
+		WebDriver driver = new FirefoxDriver();
 		driver.manage().window().maximize();
-		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-		driver.navigate().to("https://www.makemytrip.com/");
-
-		driver.findElement(By.xpath("//span[@class='langCardClose']")).click();
-		driver.findElement(By.xpath("//span[text()='From']")).click();
-		WebDriverWait wait = new WebDriverWait(driver, 10);
+		driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+		WebDriverWait wait=new WebDriverWait(driver, 30);
 		Actions act = new Actions(driver);
+		driver.navigate().to("https://www.makemytrip.com/");
+		
+		
+		Thread.sleep(10000);
+		//driver.findElement(By.xpath("//a[@class='close']")).click();
+		
+		driver.findElement(By.xpath("//span[@class='ic_circularclose_grey']")).click();
+		
+	    
+	 	driver.findElement(By.xpath("//span[text()='From']")).click();
+		
+
 		WebElement ple = driver.findElement(By.xpath("//input[@placeholder='From']"));
 		ple.sendKeys(arr[0]);
 		Thread.sleep(2000);
@@ -56,8 +69,8 @@ public class TC_makeMyTrip_001 {
 		Select sel=new Select(fromPlace1);
 		
 
-		driver.findElement(By.xpath("//span[.='DEPARTURE']")).click();
-		Thread.sleep(3000);
+		driver.findElement(By.xpath("//span[text()='DEPARTURE']")).click();
+		Thread.sleep(4000);
 		LocalDateTime ldt = LocalDateTime.now().plusYears(9);
 		ldt.plusDays(15);
 		String month = ldt.getMonth().toString();
@@ -65,7 +78,7 @@ public class TC_makeMyTrip_001 {
 		int year = ldt.getYear();
 		int day = ldt.getDayOfMonth();
 
-		selectDate(driver, "August", 2022, 22);
+		selectDate(driver, "August", 2023, 22);
 	}
 
 	public static void selectDate(WebDriver driver, String monthValue, int year, int day) throws InterruptedException {
